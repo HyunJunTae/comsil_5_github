@@ -1,0 +1,14 @@
+if [ $# -eq 0 ]; then
+    echo -e "Usage: phone searchfor [...searchfor]"
+    echo "(You didn't tell me what you want to search for.)"
+    exit 1
+fi
+
+
+DATA_FILE="mydata.txt"
+
+SEARCH_PATTERN=$(echo "$*" | sed 's/ /|/g')
+
+RESULT=$(egrep -i "$SEARCH_PATTERN" "$DATA_FILE")
+
+echo "$RESULT" | awk -f display.awk
